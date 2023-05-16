@@ -10,7 +10,7 @@
 # i. 请在`XXXXXX`处设置相应的root密码
 # ii. 同时请注意root密码放在脚本是非常危险的，因此这里仅仅是用于开发测试阶段。
 ROOT=root
-PASSWORD=litemall123456
+PASSWORD=root
 
 if test -z "$PASSWORD"
 then
@@ -19,18 +19,18 @@ then
 fi
 
 # 删除storage文件夹内文件
-cd /home/ubuntu/docker/litemall/storage || exit 2
+cd /home/weizhiqiang/mall/docker/litemall/storage || exit 2
 sudo rm -f ./**
 
-cd /home/ubuntu/docker || exit 3
+cd /home/weizhiqiang/mall/docker || exit 3
 sudo docker-compose down
 sudo docker-compose build
 sudo docker image prune -f
 
 # 删除db/data文件夹内文件重置数据
 # 这样docker启动时会自动运行db/init-sql脚本，导入新的数据
-cd /home/ubuntu/docker/db/data || exit 1
+cd /home/weizhiqiang/mall/docker/db/data || exit 1
 sudo rm -rf ./**
 
-cd /home/ubuntu/docker || exit 3
+cd /home/weizhiqiang/mall/docker || exit 3
 sudo docker-compose up -d

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# 需要先在服务器上安装mysql+OpenJDK8
+
 # 本脚本的作用是
 # 1. 项目打包
 # 2. 上传云服务器
@@ -7,10 +9,10 @@
 
 # 请设置云服务器的IP地址和账户
 # 例如 ubuntu@122.51.199.160
-REMOTE=ubuntu@122.51.199.160
+REMOTE=weizhiqiang@119.29.191.178
 # 请设置本地SSH私钥文件id_rsa路径
 # 例如 /home/litemall/id_rsa
-ID_RSA=/d/00/cloud/litemall.txt
+ID_RSA=~/.ssh/id_rsa
 
 if test -z "$REMOTE"
 then
@@ -35,12 +37,12 @@ cd $LITEMALL_HOME || exit 2
 
 # 上传云服务器
 cd $LITEMALL_HOME || exit 2
-scp -i $ID_RSA -r  ./docker $REMOTE:/home/ubuntu/
+scp -i $ID_RSA -r  ./docker $REMOTE:/home/weizhiqiang/mall
 
 # 远程登录云服务器并执行reset脚本
 # 这里使用tr命令，因为有可能deploy.sh和reset.sh的换行格式是CRLF，而LINUX环境应该是LF
 ssh $REMOTE -i $ID_RSA << eeooff
-cd /home/ubuntu/docker/bin
+cd /home/weizhiqiang/mall/docker/bin
 cat deploy.sh | tr -d '\r' > deploy2.sh
 mv deploy2.sh deploy.sh
 chmod +x deploy.sh

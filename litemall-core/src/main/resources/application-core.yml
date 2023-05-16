@@ -1,10 +1,16 @@
+#    莱伯
+#    app-id: wx001aff2f77c9c18c
+#    app-secret: bebfdac878e9dc3e22bc87dac55d96a6
+#   me
+#    app-id: wx52094b401e3f54a3
+#    app-secret: f0e3ddda02841ea6783fd6ead30b48f5
+
 litemall:
   # 开发者应该设置成自己的wx相关信息
   wx:
-#    app-id: wxa5b486c6b918ecfb
-#    app-secret: e04004829d4c383b4db7769d88dfbca1
-    app-id: wx52094b401e3f54a3
-    app-secret: f0e3ddda02841ea6783fd6ead30b48f5
+#  莱伯
+    app-id: wx001aff2f77c9c18c
+    app-secret: bebfdac878e9dc3e22bc87dac55d96a6
     mch-id: 111111
     mch-key: xxxxxx
     notify-url: http://www.example.com/wx/order/pay-notify
@@ -88,13 +94,13 @@ litemall:
   # 对象存储配置
   storage:
     # 当前工作的对象存储模式，分别是local、aliyun、tencent、qiniu
-    active: local
+    active: tencent
     # 本地对象存储配置信息
     local:
       storagePath: storage
       # 这个地方应该是wx模块的WxStorageController的fetch方法对应的地址
       address: http://localhost:8080/wx/storage/fetch/
-#      address:  http://192.168.0.102:8080/wx/storage/fetch/
+#zhiqiang      ADDRESS: HTTP://ip:8080/WX/STORAGE/FETCH/
     # 阿里云对象存储配置信息
     aliyun:
       endpoint: oss-cn-shenzhen.aliyuncs.com
@@ -104,10 +110,14 @@ litemall:
     # 腾讯对象存储配置信息
     # 请参考 https://cloud.tencent.com/document/product/436/6249
     tencent:
-      secretId: AKIDOccMr856uoU1Tsa2MQL5aqseBUWRrb5i
-      secretKey: XqtgEhIdrupTs4ygaWlkUUXv3w3FiwuD
-      region: ap-shanghai
-      bucketName: vytech-1300096589
+      secret-id: AKIDhHrV0Po8NYbWOBoHblmbP8ljZLzQisGT
+      secret-key: FalldjlgS3Vo285veGgv1zLG7qPo00nS
+      region: ap-nanjing
+      bucket-name: laberking-1306666341
+#      secretId: AKIDOccMr856uoU1Tsa2MQL5aqseBUWRrb5i
+#      secretKey: XqtgEhIdrupTs4ygaWlkUUXv3w3FiwuD
+#      region: ap-shanghai
+#      bucketName: vytech-1300096589
     # 七牛云对象存储配置信息
     qiniu:
       endpoint: http://pd5cb6ulu.bkt.clouddn.com

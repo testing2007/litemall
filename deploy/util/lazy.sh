@@ -1,4 +1,11 @@
 #!/bin/bash
+################# NOTE:IMPORTANT ####################
+# 先要在目标机器上安装 mysql+openjdk8(mysql要为root用户设置密码root)
+# /home/weizhiqiang/mall  -- 目标机器接受 litemall/deploy 的复制文件夹（不包括deploy文件夹）
+#####################################################
+
+
+
 
 # 本脚本的作用是
 # 1. 项目打包
@@ -6,11 +13,11 @@
 # 3. 远程登录云服务器并执行reset脚本
 
 # 请设置云服务器的IP地址和账户
-# 例如 ubuntu@122.51.199.160
-REMOTE=
+# 例如 ubuntu@119.29.191.178
+REMOTE=weizhiqiang@119.29.191.178
 # 请设置本地SSH私钥文件id_rsa路径
 # 例如 /home/litemall/id_rsa
-ID_RSA=
+ID_RSA=~/.ssh/id_rsa
 
 if test -z "$REMOTE"
 then
@@ -35,18 +42,37 @@ cd $LITEMALL_HOME || exit 2
 
 # 上传云服务器
 cd $LITEMALL_HOME || exit 2
-scp -i $ID_RSA -r  ./deploy $REMOTE:/home/ubuntu/
+scp -i $ID_RSA -r  ./deploy/* $REMOTE:/home/weizhiqiang/mall
 
 # 远程登录云服务器并执行reset脚本
 # 这里使用tr命令，因为有可能deploy.sh和reset.sh的换行格式是CRLF，而LINUX环境应该是LF
 ssh $REMOTE -i $ID_RSA << eeooff
-cd /home/ubuntu/deploy/bin
-cat deploy.sh | tr -d '\r' > deploy2.sh
-mv deploy2.sh deploy.sh
+sudo apt-get install dos2unix
+
+cd /home/weizhiqiang/mall/bin
+
+dos2unix deploy.sh
+dos2unix reset.sh
+dos2unix stop.sh
+
 chmod +x deploy.sh
-cat reset.sh | tr -d '\r' > reset2.sh
-mv reset2.sh reset.sh
 chmod +x reset.sh
-sudo ./reset.sh
+chmod +x stop.sh
+
+sudo sh ./reset.sh
+
 exit
 eeooff
+
+
+# ssh $REMOTE -i $ID_RSA << eeooff
+# cd /home/weizhiqiang/mall/bin
+# cat deploy.sh | tr -d '\r' > deploy2.sh
+# mv deploy2.sh deploy.sh
+# chmod +x deploy.sh
+# cat reset.sh | tr -d '\r' > reset2.sh
+# mv reset2.sh reset.sh
+# chmod +x reset.sh
+# sudo ./reset.sh
+# exit
+# eeooff

@@ -22,9 +22,9 @@ npm install --registry=https://registry.npm.taobao.org
 npm run build:dep
 
 # 打包litemall-vue
-cd $LITEMALL_HOME/litemall-vue
-npm install --registry=https://registry.npm.taobao.org
-npm run build:dep
+# cd $LITEMALL_HOME/litemall-vue
+# npm install --registry=https://registry.npm.taobao.org
+# npm run build:dep
 
 cd $LITEMALL_HOME
 mvn clean package
